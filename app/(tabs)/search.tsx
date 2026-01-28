@@ -12,11 +12,7 @@ import {
 import { router } from "expo-router";
 import { searchMulti, posterUrl, type TmdbSearchItem } from "../../src/lib/tmdb";
 
-
 export default function Search() {
-  // Quick env sanity check (you can remove later)
-  console.log("TMDB key exists?", !!process.env.EXPO_PUBLIC_TMDB_API_KEY);
-
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<TmdbSearchItem[]>([]);
@@ -96,10 +92,7 @@ export default function Search() {
               }}
             >
               {img ? (
-                <Image
-                  source={{ uri: img }}
-                  style={{ width: 50, height: 75, borderRadius: 8 }}
-                />
+                <Image source={{ uri: img }} style={{ width: 50, height: 75, borderRadius: 8 }} />
               ) : (
                 <View
                   style={{
