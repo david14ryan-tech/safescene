@@ -1,24 +1,22 @@
-import { Link } from "expo-router";
+import { router } from "expo-router";
+import { useEffect } from "react";
 import { View, Text } from "react-native";
+import { useAuth } from "../src/contexts/AuthContext";
 
-export default function Home() {
-  // 👇 ADD THIS LINE
-  console.log("Firebase project ID:", process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID);
+
+
+export default function Index() {
+  const { user, initializing } = useAuth();
+
+  useEffect(() => {
+    if (initializing) return;
+    if (user) router.replace("/(tabs)/search");
+    else router.replace("/(auth)/login");
+  }, [user, initializing]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 12,
-      }}
-    >
-      <Text style={{ fontSize: 28, fontWeight: "600" }}>SafeScene</Text>
-
-      <Link href="(auth)/login">Go to Login</Link>
-      <Link href="(auth)/register">Go to Register</Link>
-      <Link href="(tabs)/search">Go to App (temporary)</Link>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Loading...</Text>
     </View>
   );
 }
